@@ -1,0 +1,21 @@
+Dans le rapport il doit y avoir :
+
+1. Introduction
+2. Modele Entite-association (commenté)
+3. Modele relationnel
+4. Requete 
+  4.a. Principales
+5. Interface
+6. Utilisation
+
+
+Requetes :
+- renseignement sur un utilisateur
+- selection des recettes par mots-clés, selon un intervalle de budget, par eleve ayant proposé la recette
+- faire la moyenne des prix des recettes proposées par un eleve donné
+- pouvoir connaitre le nombre de recette disponible pour chaque catégorie
+- classer les recettes selon le meilleur rapport qualité/prix
+- classer les deserts les plus rapides à réaliser
+- classer les plats les plus commentés
+- calculer l'eleve dont l'ecart type des notes des notes à la moyenne de chacun des plats qu'il a commenté est le plus faible
+
