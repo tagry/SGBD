@@ -38,6 +38,7 @@ create table ELEVE
 create table RECETTE
 (
     NUMERO_RECETTE              NUMBER(4)               not null,
+    NUMERO_CREATEUR             NUMBER(4)               not null,
     NOM_RECETTE                 CHAR(20)                not null,
     CATEGORIE                   CHAR(1)                         ,
     BUDGET                      NUMBER(3)                       ,
@@ -108,3 +109,7 @@ alter table NOTE
 alter table NOTE
     add constraint fk2_note foreign key (NUMERO_RECETTE)
        references RECETTE (NUMERO_RECETTE);
+
+alter table RECETTE
+    add constraint fk2_note foreign key (NUMERO_ELEVE)
+       references ELEVE (NUMERO_ELEVE);

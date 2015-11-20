@@ -11,11 +11,29 @@ Dans le rapport il doit y avoir :
 
 Requetes :
 - renseignement sur un utilisateur
+select * from ELEVE where NOM_ELEVE = ' ' or NUMERO_ELEVE = ' ';
+select RECETTE.* from RECETTE, ELEVE where ELEVE.NUMERO_ELEVE = RECETTE.NUMERO_CREATEUR and NOM_ELEVE = ' ';
+
 - selection des recettes par mots-clés, selon un intervalle de budget, par eleve ayant proposé la recette
+select * from RECETTE where NOM_RECETTE = ' ' or CATEGORIE = ' ';
+select * from RECETTE where BUDGET < ' ' and BUDGET > ' ';
+select * from RECETTE where NOM_CREATEUR = ' ';
+
 - faire la moyenne des prix des recettes proposées par un eleve donné
+select avg(BUDGET) from RECETTE where NOM_CREATEUR = ' ';
+
 - pouvoir connaitre le nombre de recette disponible pour chaque catégorie
-- classer les recettes selon le meilleur rapport qualité/prix
-- classer les deserts les plus rapides à réaliser
-- classer les plats les plus commentés
-- calculer l'eleve dont l'ecart type des notes des notes à la moyenne de chacun des plats qu'il a commenté est le plus faible
+select count(*) as NOMBRE_DE_RECETTE from RECETTE where CATEGORIE = ' '; 
+
+(- classer les recettes selon le meilleur rapport qualité/prix)
+(à revoir...) select * from RECETTE, NOTE where RECETTE.NUMERO_RECETTE = NOTE.NUMERO_RECETTE group by BUDGET order by RECETTE.NOTE_GASTRONOMIQUE
+(- classer les deserts les plus rapides à réaliser)
+(- classer les plats les plus commentés)
+(- calculer l'eleve dont l'ecart type des notes des notes à la moyenne de chacun des plats qu'il a commenté est le plus faible)
+
+- ajout d'une recette, d'un élève, d'un aliment
+insert into RECETTE values ( numero, etc)
+
+- suppression d'une recette, d'un aliment, d'un eleve
+delete from RECETTE where 'conditions'
 
