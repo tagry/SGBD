@@ -1,0 +1,13 @@
+Dans le rapport il doit y avoir :
+
+1. Introduction
+2. Modele Entite-association (commenté)
+3. Modele relationnel
+4. Requete 
+  4.a. Principales
+5. Interface
+6. Utilisation
+
+
+Requetes :
+- 
