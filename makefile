@@ -8,9 +8,12 @@ COMPILE=compile
 
 default: $(COMPILE)
 
-compile: $(SRC)/programme_recette.java
+compile: $(SRC)/menu.java
 	javac $(CFLAGS) $^
 
 
 run: compile
-	java $(CFLAGS2) ./$(BUILD)/programme_recette
+	java $(CFLAGS2) menu
+
+clean:
+	rm -rf $(BUILD)/*
