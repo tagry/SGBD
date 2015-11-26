@@ -18,9 +18,10 @@ select RECETTE.* from RECETTE, ELEVE where ELEVE.NUMERO_ELEVE = RECETTE.NUMERO_C
 select * from RECETTE where NOM_RECETTE = ' ' or CATEGORIE = ' ';
 select * from RECETTE where BUDGET < ' ' and BUDGET > ' ';
 select * from RECETTE where NOM_CREATEUR = ' ';
+select RECETTE.* from RECETTE, COMPOSE, ALIMENT where COMPOSE.MOT_CLE = '1' and ALIMENT.NUMERO_ALIMENT = COMPOSE.NUMERO_ALIMENT and COMPOSE.NUMERO_RECETTE = RECETTE.NUMERO_RECETTE and ALIMENT.NOM_ALIMENT = ' ';
 
 - faire la moyenne des prix des recettes proposées par un eleve donné
-select avg(BUDGET) from RECETTE where NOM_CREATEUR = ' ';
+select avg(RECETTE.BUDGET) as MOYENNE_DE_PRIX from RECETTE, ELEVE where RECETTE.NUMERO_CREATEUR = ELEVE.NUMERO_ELEVE and ELEVE.NOM_ELEVE = ' ';
 
 - pouvoir connaitre le nombre de recette disponible pour chaque catégorie
 select count(*) as NOMBRE_DE_RECETTE from RECETTE where CATEGORIE = ' '; 
@@ -32,8 +33,9 @@ select count(*) as NOMBRE_DE_RECETTE from RECETTE where CATEGORIE = ' ';
 (- calculer l'eleve dont l'ecart type des notes des notes à la moyenne de chacun des plats qu'il a commenté est le plus faible)
 
 - ajout d'une recette, d'un élève, d'un aliment
-insert into RECETTE values ( numero, etc)
+insert into RECETTE values ( numero, etc); commit;
 
 - suppression d'une recette, d'un aliment, d'un eleve
-delete from RECETTE where 'conditions'
+delete from RECETTE where 'conditions';
+
 
