@@ -113,7 +113,7 @@ alter table NOTE
        references RECETTE (NUMERO_RECETTE);
 
 alter table RECETTE
-    add constraint fk1_recette foreign key (NUMERO_ELEVE)
+    add constraint fk1_recette foreign key (NUMERO_CREATEUR)
        references ELEVE (NUMERO_ELEVE);
 
 alter table ETAPE

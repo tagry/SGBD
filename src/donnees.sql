@@ -2,12 +2,13 @@
 --    suppression des donnees
 -- ============================================================
 
-delete from ELEVE ;
-delete from RECETTE ;
-delete from ETAPE;
-delete from ALIMENT ;
-delete from NOTE ;
 delete from COMPOSE;
+delete from NOTE ;
+delete from ETAPE;
+delete from RECETTE ;
+delete from ELEVE ;
+delete from ALIMENT ;
+
 
 commit;
 
@@ -54,10 +55,10 @@ insert into ETAPE values (4, 1, 'DANS UN SALADIER, MELANGEZ LES OEUFS ET LE SUCR
 insert into ETAPE values (5, 1, 'VERSEZ LE CHOCOLAT FONDU, PUIS MELANGEZ JUSQU A OBTENTION D UNE PATE HOMOGENE');
 insert into ETAPE values (6, 1, 'VERSEZ LA PREPARATION DANS UN MOULE A MANQUE BEURRE ET FARINE');
 insert into ETAPE values (7, 1, 'FAITES CUIRE ENVIRON 25 MINUTES');
-insert into ETAPE values (1, 2, 'DANS UN SALADIER, VERSEZ LA MOITIE DE LA FARINE, PUIS RAJOUTEZ LES OEUFS UN A UN');
-insert into ETAPE values (2, 2, 'RAJOUTEZ ENSUITE UN PEU DE LAIT PUIS DE LA FARINE PUIS A NOUVEAU DU LAIT ET AINSI DE SUITE');
-insert into ETAPE values (3, 2, 'RAJOUTEZ L HUILE ET LA BIERE');
-insert into ETAPE values (4, 2, 'LAISSEZ REPOSER UNE HEURE ET VOTRE PATE EST PRETE');
+insert into ETAPE values (8, 2, 'DANS UN SALADIER, VERSEZ LA MOITIE DE LA FARINE, PUIS RAJOUTEZ LES OEUFS UN A UN');
+insert into ETAPE values (9, 2, 'RAJOUTEZ ENSUITE UN PEU DE LAIT PUIS DE LA FARINE PUIS A NOUVEAU DU LAIT ET AINSI DE SUITE');
+insert into ETAPE values (10, 2, 'RAJOUTEZ L HUILE ET LA BIERE');
+insert into ETAPE values (11, 2, 'LAISSEZ REPOSER UNE HEURE ET VOTRE PATE EST PRETE');
 
 commit;
 
