@@ -39,7 +39,7 @@ create table RECETTE
 (
     NUMERO_RECETTE              NUMBER(4)               not null,
     NUMERO_CREATEUR             NUMBER(4)               not null,
-    NOM_RECETTE                 CHAR(20)                not null,
+    NOM_RECETTE                 CHAR(30)                not null,
     CATEGORIE                   CHAR(1)                         ,
     BUDGET                      NUMBER(3)                       ,
     DIFFICULTE                  NUMBER(1)                       ,
@@ -54,6 +54,7 @@ create table RECETTE
 create table ALIMENT
 (
     NUMERO_ALIMENT                NUMBER(4)              not null,
+    NOM_ALIMENT                   CHAR(20)               not null,
     MESURE                        CHAR(30)               not null,
     constraint pk_aliment primary key (NUMERO_ALIMENT)
 );
@@ -64,6 +65,7 @@ create table ALIMENT
 create table ETAPE
 (
     NUMERO_ETAPE                    NUMBER(5)              not null,
+    NUMERO_RECETTE                  NUMBER(4)              not null,
     DESCRIPTION                     CHAR(200)              not null,
     constraint pk_etape primary key (NUMERO_ETAPE)
 );
@@ -75,9 +77,9 @@ create table NOTE
 (
     NUMERO_ELEVE                    NUMBER(4)              not null,
     NUMERO_RECETTE                  NUMBER(4)              not null,
-    NOTE_GASTRONOMIQUE              NUMBER                         ,
-    NOTE_BUDGET                     NUMBER                         ,
-    NOTE_DIFFICULTE                 NUMBER                         ,
+    NOTE_GASTRONOMIQUE              NUMBER(1)                      ,
+    NOTE_BUDGET                     NUMBER(1)                      ,
+    NOTE_DIFFICULTE                 NUMBER(1)                      ,
     constraint pk_note primary key (NUMERO_ELEVE, NUMERO_RECETTE)
 );
 
@@ -88,7 +90,7 @@ create table COMPOSE
 (
     NUMERO_ALIMENT                  NUMBER(5)              not null,
     NUMERO_RECETTE                  NUMBER(4)              not null,
-    QUANTITE                        NUMBER(4)                      ,
+    QUANTITE                        NUMBER(5)                      ,
     MOT_CLE                         NUMBER(1)              not null,
     constraint pk_compose primary key (NUMERO_ALIMENT, NUMERO_RECETTE)
 );
@@ -111,5 +113,9 @@ alter table NOTE
        references RECETTE (NUMERO_RECETTE);
 
 alter table RECETTE
-    add constraint fk2_note foreign key (NUMERO_ELEVE)
+    add constraint fk1_recette foreign key (NUMERO_ELEVE)
        references ELEVE (NUMERO_ELEVE);
+
+alter table ETAPE
+    add constraint fk1_etape foreign key (NUMERO_RECETTE)
+       references RECETTE (NUMERO_RECETTE);
