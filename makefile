@@ -11,7 +11,7 @@ default: $(COMPILE)
 compile: $(SRC)/menu.java
 	javac $(CFLAGS) $^
 
-compileTest:$(SRC)/ModelTable.java $(SRC)/Fenetre.java $(SRC)/TableComponent.java $(SRC)/ButtonRenderer.java
+compileTest:$(SRC)/ModelTable.java $(SRC)/Fenetre.java $(SRC)/TableComponent.java $(SRC)/ButtonEditor.java $(SRC)/ButtonRenderer.java
 	javac $(CFLAGS) $^
 
 compileTest2: $(SRC)/menu_test1.java $(SRC)/Fenetre1.java $(SRC)/menu_test1Info.java

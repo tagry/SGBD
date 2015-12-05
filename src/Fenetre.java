@@ -1,3 +1,4 @@
+import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,26 +29,30 @@ public class Fenetre extends JFrame {
 	this.setLocationRelativeTo(null);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.setTitle("JTable");
-	this.setSize(600, 140);
+	this.setSize(600, 140);						    
+	
 	Object[][] data = {
 	    {"Cysboy", "6boy", new Double(1.80), new Boolean(true)},
 	    {"BZHHydde", "BZH", new Double(1.78), new Boolean(false)},
 	    {"IamBow", "BoW", new Double(1.90), new Boolean(false)},
 	    {"FunMan", "Year", new Double(1.85), new Boolean(true)}
 	};
-	String title[] = {"Pseudo", "Age", "Taille", "OK ?"};
+
+
+	String title[] = {"Pseudo", "Age", "Taille","toto"};
 	ModelTable model = new ModelTable(data, title);
-	System.out.println("Nombre de colonne : " + model.getColumnCount());
-	System.out.println("Nombre de ligne : " + model.getRowCount());
-	this.tableau = new JTable(model);
-
-	//Pour que les boutons soit utilisable:
-	this.tableau.getColumn("Age").setCellRenderer(new ButtonRenderer());
-
-	//Pour afficher les boutons:
-	//this.tableau.setDefaultRenderer(JButton.class, new TableComponent());
-
-	this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+	this.tableau = new JTable(model);      
+	
+    this.tableau.setRowHeight(30);
+	
+    this.tableau.getColumn("Age").setCellRenderer(new ButtonRenderer());
+	
+    this.tableau.getColumn("Age").setCellEditor(new ButtonEditor(new JCheckBox()));
+	
+    //On définit l'éditeur par défaut pour la cellule en lui spécifiant quel type d'affichage prendre en compte
+	
+    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+	
     }
     
     public static void main(String[] args){

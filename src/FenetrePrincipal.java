@@ -1,3 +1,4 @@
+
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -92,6 +93,7 @@ public class FenetrePrincipal extends JFrame {
 	trie.addItem("Durée Décroissant");
 	panTrie.add(trie);
 
+	//control (detail à enlever)
 	JPanel control = new JPanel();
 	rechercherRecette = new JButton("Rechercher");
 	detail = new JButton("Détail");
