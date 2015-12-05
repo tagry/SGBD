@@ -12,13 +12,13 @@ default: $(COMPILE)
 compile: $(SRC)/menu.java
 	javac $(CFLAGS) $^
 
-compileTest: $(SRC)/menuPerso.java $(SRC)/Fenetre.java
+compileTest:$(SRC)/ModelTable.java $(SRC)/Fenetre.java $(SRC)/TableComponent.java $(SRC)/ButtonRenderer.java
 	javac $(CFLAGS) $^
 
 compileTest2: $(SRC)/menu_test1.java $(SRC)/Fenetre1.java $(SRC)/menu_test1Info.java
 	javac $(CFLAGS) $^
 
-compileProg: $(SRC)/menuPrincipal.java $(SRC)/FenetrePrincipal.java $(SRC)/menuPrincipalInfoRecette.java
+compileProg: $(SRC)/FenetrePrincipal.java $(SRC)/menuPrincipalInfoRecette.java
 	javac $(CFLAGS) $^
 
 
