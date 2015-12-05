@@ -2,37 +2,42 @@ import java.sql.*;
 import oracle.jdbc.pool.OracleDataSource;
 
 public class Exemple {
-    public static void main(String[] args)
-    throws SQLException, ClassNotFoundException, java.io.IOException {
-// Preparation de la connexion.
-        OracleDataSource ods = new OracleDataSource();
+
+    
+
+    public static OracleDataSource initConnexion () throws SQLException, ClassNotFoundException, java.io.IOException {
+        OracleDataSource ods = new OracleDataSource(); 
+
+        // Preparation de la connexion.
+        
         ods.setUser("wsoulaimana");
         ods.setPassword("wsoulaimana");
-// URL de connexion, on remarque que le pilote utilise est "thin".
+        
+        // URL de connexion.
         ods.setURL("jdbc:oracle:thin:@localhost:1521/oracle");
+	return ods;
+    }
+
+
+
+
+    public static void main(String[] args)
+    throws SQLException, ClassNotFoundException, java.io.IOException {
+
+        // Lancement de la connexion
+        OracleDataSource ods = initConnexion();
 
         Connection conn = null;
         Statement stmt = null;
         Statement stmt2 = null;
+        
         try {
-            conn = ods.getConnection();
-            stmt = conn.createStatement();
-            stmt2 = conn.createStatement();
-// Execution de la requete.
 
-            ResultSet rset = stmt.executeQuery(
-                    "select NOM_RECETTE, CATEGORIE "
-                +   "from RECETTE");
+            Requete rq = new Requete (ods);
+            rq.utilisateur("SOULAIMANA");
+            rq.utilisateur(3);
+            rq.recette("CREPE");
 
-            ResultSet rset2 = stmt2.executeQuery(
-                    "select NOM_ELEVE "
-                +   "from ELEVE");
-
-            while (rset.next())
-                System.out.println(rset.getString(1) + rset.getString(2));
-
-            while (rset2.next())
-                System.out.println(rset2.getString(1));
         }
 
         finally {
