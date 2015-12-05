@@ -27,8 +27,8 @@ drop table COMPOSE cascade constraints;
 create table ELEVE
 (
     NUMERO_ELEVE                    NUMBER(4)              not null,
-    NOM_ELEVE                       CHAR(20)               not null,
-    PRENOM_ELEVE                    CHAR(20)                       ,
+    NOM_ELEVE                       VARCHAR(20)               not null,
+    PRENOM_ELEVE                    VARCHAR(20)                       ,
     constraint pk_eleve primary key (NUMERO_ELEVE)
 );
 
@@ -39,7 +39,7 @@ create table RECETTE
 (
     NUMERO_RECETTE              NUMBER(4)               not null,
     NUMERO_CREATEUR             NUMBER(4)               not null,
-    NOM_RECETTE                 CHAR(30)                not null,
+    NOM_RECETTE                 VARCHAR(30)                not null,
     CATEGORIE                   CHAR(1)                         ,
     BUDGET                      NUMBER(3)                       ,
     DIFFICULTE                  NUMBER(1)                       ,
@@ -54,8 +54,8 @@ create table RECETTE
 create table ALIMENT
 (
     NUMERO_ALIMENT                NUMBER(4)              not null,
-    NOM_ALIMENT                   CHAR(20)               not null,
-    MESURE                        CHAR(30)               not null,
+    NOM_ALIMENT                   VARCHAR(20)               not null,
+    MESURE                        VARCHAR(30)               not null,
     constraint pk_aliment primary key (NUMERO_ALIMENT)
 );
 
@@ -66,7 +66,7 @@ create table ETAPE
 (
     NUMERO_ETAPE                    NUMBER(5)              not null,
     NUMERO_RECETTE                  NUMBER(4)              not null,
-    DESCRIPTION                     CHAR(200)              not null,
+    DESCRIPTION                     VARCHAR(200)              not null,
     constraint pk_etape primary key (NUMERO_ETAPE)
 );
 

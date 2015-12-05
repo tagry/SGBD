@@ -2,6 +2,7 @@ BUILD=./build
 SRC=./src
 CFLAGS=-d $(BUILD) -cp $(BUILD) -Xlint
 CFLAGS2=-cp $(BUILD)
+FLAGS=-cp $(BUILD) -d $(BUILD)
 
 EXEC= run
 COMPILE=compile
@@ -32,6 +33,11 @@ run: compile
 
 prog: compileProg
 	java $(CFLAGS2) FenetrePrincipal
+
+
+
+rqt: $(SRC)/Exemple.java $(SRC)/Requete.java
+	javac $(FLAGS) $^ && java Exemple
 
 clean:
 	rm -rf $(BUILD)/*
