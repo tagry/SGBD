@@ -42,7 +42,7 @@ commit;
 -- RECETTE
 
 insert into RECETTE values (1, 2, 'GATEAU AU CHOCOLAT', 'D', 10, 2, 10, 25);
-insert into RECETTE values (2, 2, 'CREPE', 'D', 10, 1, 15, 30);
+insert into RECETTE values (2, 2, 'CREPE', 'D', 15, 1, 15, 30);
 
 commit;
 
