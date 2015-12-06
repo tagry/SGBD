@@ -91,8 +91,8 @@ create table COMPOSE
 (
     NUMERO_ALIMENT                  NUMBER(5)              not null,
     NUMERO_RECETTE                  NUMBER(4)              not null,
-    QUANTITE                        NUMBER(5)                      ,
-    MOT_CLE                         NUMBER(1)              not null,
+    QUANTITE                        NUMBER(5)              not null,
+    MOT_CLE                         NUMBER(1)                      ,
     constraint pk_compose primary key (NUMERO_ALIMENT, NUMERO_RECETTE)
 );
 
