@@ -28,22 +28,23 @@ public class Exemple {
         OracleDataSource ods = initConnexion();
 
         Connection conn = null;
-        Statement stmt = null;
-        Statement stmt2 = null;
         
         try {
 
             Requete rq = new Requete (ods);
-            rq.utilisateur("SOULAIMANA");
+
+            //rechercheRecette(nomRct,categ,tri,prixMin,prixMax,difficulteMax,tempsMax)
+            //rq.rechercheRecette(null,"T", 3, -1, -1, -1, -1);
+            
+            rq.rechercheEleve(2);
+            /*rq.utilisateur("SOULAIMANA");
+            rq.utilisateur("GOURRIN");
             rq.utilisateur(3);
-            rq.recette("CREPE");
+            rq.recette("CREPE");*/
 
         }
 
         finally {
-            if (stmt != null) {
-                stmt.close();
-            }
             if (conn != null) {
                 conn.close();
             }
