@@ -4,6 +4,7 @@ public class menuPrincipalInfoRecette{
 	private String nom, categorie;
 	private int prixMin, prixMax, difficulter,tempsMax, trie;
 	Object[][] tableau = new Object[5000][13];
+	boolean changer;
 
 	public menuPrincipalInfoRecette(){
 		int i = 0;
@@ -12,7 +13,7 @@ public class menuPrincipalInfoRecette{
 		{
 			for(j = 0;j <13; j++)
 			{
-				this.tableau[i][j] = "1";
+				this.tableau[i][j] = "11212654654";
 			}
 		}
 		
@@ -30,6 +31,11 @@ public class menuPrincipalInfoRecette{
 		if(controlErreur())
 		{
 			requete();
+			changer = true;
+		}
+		else
+		{
+			changer = false;
 		}
 		
 	}

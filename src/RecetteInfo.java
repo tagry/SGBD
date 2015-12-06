@@ -15,7 +15,7 @@ public class RecetteInfo{
 
 	public void requete()
 		{
-			System.out.println("\nRequete vers Recette effectué");
+			System.out.println("\nRequete vers Recette "+numeroRecette+" effectué");
 		}
 
 }

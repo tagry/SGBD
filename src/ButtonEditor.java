@@ -21,6 +21,7 @@ public class ButtonEditor extends DefaultCellEditor {
 	protected JButton button;
 	private boolean   isPushed;
 	private RecetteInfo infoRecette;
+	private ResultatEleve infoEleve;
 	private ButtonListener bListener = new ButtonListener();
 
 	public ButtonEditor(JCheckBox checkBox) {
@@ -65,6 +66,12 @@ public class ButtonEditor extends DefaultCellEditor {
 				infoRecette = new RecetteInfo(table.getValueAt(this.row, 2));
 				DialogDetailRecette fenetreRecette = new DialogDetailRecette(infoRecette);
 			}
+
+				if(table.getColumnName(this.column) == "Nom Créateur")
+			{
+				infoEleve = new ResultatEleve(table.getValueAt(this.row, 4));
+				DialogEleve fenetreRecette = new DialogEleve(infoRecette);
+			}				
 	
 		}
 	}

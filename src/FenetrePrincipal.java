@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.JCheckBox;
+import javax.swing.table.TableColumn;
 
 public class FenetrePrincipal extends JFrame {
     
@@ -32,7 +33,7 @@ public class FenetrePrincipal extends JFrame {
     private ArrayList<JRadioButton> nomArray;
     private JComboBox categorie, trie, difficulter;
     private JTextField nom,prixMin,prixMax, tempsMax;
-    private JButton rechercherRecette;
+    private JButton rechercherRecette, stat, mesRecettes;
 
     
 public FenetrePrincipal(){      
@@ -48,10 +49,14 @@ public FenetrePrincipal(){
 private void initComponent(){
 	JPanel panRecette = new JPanel();
 
-	//parametrage tableau
+	//parametrage tableau(boutons)
 	tableau.getTableHeader().setReorderingAllowed(false) ;
 	this.tableau.getColumn("Nom Recette").setCellRenderer(new ButtonRenderer());
 	this.tableau.getColumn("Nom Recette").setCellEditor(new ButtonEditor(new JCheckBox()));
+
+	this.tableau.getColumn("Nom Créateur").setCellRenderer(new ButtonRenderer());
+	this.tableau.getColumn("Nom Créateur").setCellEditor(new ButtonEditor(new JCheckBox()));
+
 	
 	panRecette.setPreferredSize(new Dimension(250, 600));
 	panRecette.setBackground(Color.white);
@@ -141,16 +146,81 @@ private void initComponent(){
 	JPanel control = new JPanel();
 	rechercherRecette = new JButton("Rechercher");
 
+	//Bouton statistique
+	JPanel panStat = new JPanel();
+	stat = new JButton("Statistique");
+	panStat.add(stat);
+
+	//Bouton pour aller vers mes recettes
+	JPanel panMesRecettes = new JPanel();
+	mesRecettes = new JButton("Mes Recettes");
+	panMesRecettes.add(mesRecettes);
+
+	//action du bouton Statistique
+	stat.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {        
+				DialogStat d = new DialogStat();
+				
+			}
+  
+		});
+	
+	//action du bouton recherche
 	rechercherRecette.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {        
 				InfoRecette = new menuPrincipalInfoRecette(nom.getText(), (String)categorie.getSelectedItem(),(String)trie.getSelectedItem(), prixMin.getText(), prixMax.getText(), (String)difficulter.getSelectedItem(), tempsMax.getText());
-				model = new ModelTable(InfoRecette.tableau, title);
 
-				tableau.setModel(model);
-				tableau.getTableHeader().setReorderingAllowed(false) ;
-				tableau.getColumn("Nom Recette").setCellRenderer(new ButtonRenderer());
-				tableau.getColumn("Nom Recette").setCellEditor(new ButtonEditor(new JCheckBox()));
-				
+				if(InfoRecette.changer)
+				{
+					model = new ModelTable(InfoRecette.tableau, title);
+					TableColumn col = tableau.getColumnModel().getColumn(0);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(925);
+
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(925);
+
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(925);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(925);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(925);
+
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+					
+					col = tableau.getColumnModel().getColumn(2);
+					col.setPreferredWidth(200);
+		
+					tableau.setModel(model);
+					tableau.getTableHeader().setReorderingAllowed(false) ;
+					tableau.getColumn("Nom Recette").setCellRenderer(new ButtonRenderer());
+					tableau.getColumn("Nom Recette").setCellEditor(new ButtonEditor(new JCheckBox()));
+					
+					tableau.getColumn("Nom Créateur").setCellRenderer(new ButtonRenderer());
+					tableau.getColumn("Nom Créateur").setCellEditor(new ButtonEditor(new JCheckBox()));
+				}
+					
 			}
   
 		});
@@ -166,10 +236,56 @@ private void initComponent(){
 	panRecette.add(panPrixMax);
 	panRecette.add(panTempsMax);
 	panRecette.add(control);
+	panRecette.add(panStat);
+	panRecette.add(panMesRecettes);
 
 	//Nous ajoutons notre tableau à notre contentPane dans un scroll
 	//Sinon les titres des colonnes ne s'afficheront pas !
 
+	//Taille des colonnes !
+	
+	TableColumn col = tableau.getColumnModel().getColumn(0);
+	col.setPreferredWidth(200);
+	
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(925);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(925);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(925);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(925);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(925);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+
+	col = tableau.getColumnModel().getColumn(2);
+	col.setPreferredWidth(200);
+	
+
+	new JScrollPane(tableau, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	tableau.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	this.getContentPane().add(panRecette, BorderLayout.WEST);
 	this.getContentPane().add(new JScrollPane(tableau));
 
