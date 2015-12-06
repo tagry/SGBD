@@ -35,7 +35,7 @@ class ModelTable extends AbstractTableModel{
 	//Définit la valeur à l'emplacement spécifié
     public void setValueAt(Object value, int row, int col) {
 		//On interdit la modification sur certaines colonnes !
-		if(!this.getColumnName(col).equals("Age") && !this.getColumnName(col).equals("Suppression"))
+		if(!this.getColumnName(col).equals("Age") && !this.getColumnName(col).equals("Suppression") && !this.getColumnName(col).equals("Nom RecetteInfo"))
 			this.data[row][col] = value;
     }
 
@@ -48,7 +48,7 @@ class ModelTable extends AbstractTableModel{
     }
 
 	public boolean isCellEditable(int row, int col){
-		if(col == 1)
+		if(col == 0 || col == 1)
 			return true;
 		else
 			return false;

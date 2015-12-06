@@ -20,6 +20,7 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	protected JButton button;
 	private boolean   isPushed;
+	private RecetteInfo infoRecette;
 	private ButtonListener bListener = new ButtonListener();
 
 	public ButtonEditor(JCheckBox checkBox) {
@@ -58,12 +59,13 @@ public class ButtonEditor extends DefaultCellEditor {
 		public JButton getButton(){return this.button;}
 
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("coucou du bouton : " + table.getValueAt(this.row, this.column+1)   /*((JButton)event.getSource()).getText()*/);
-			//On affecte un nouveau libellé à une celulle de la ligne
-			((AbstractTableModel)table.getModel()).setValueAt("New Value " + (++nbre), this.row, (this.column -1));   
-			//Permet de dire à notre tableau qu'une valeur a changé à l'emplacement déterminé par les valeurs passées en paramètres
-			((AbstractTableModel)table.getModel()).fireTableCellUpdated(this.row, this.column - 1);
-			this.button = ((JButton)event.getSource());
+			
+				if(table.getColumnName(this.column) == "Nom Recette")
+			{
+				infoRecette = new RecetteInfo(table.getValueAt(this.row, 2));
+				DialogDetailRecette fenetreRecette = new DialogDetailRecette(infoRecette);
+			}
+	
 		}
 	}
 

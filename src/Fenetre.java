@@ -26,37 +26,37 @@ public class Fenetre extends JFrame {
     private JTable tableau;
     private JButton change = new JButton("Changer la taille");
     public Fenetre(){
-	this.setLocationRelativeTo(null);
-	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	this.setTitle("JTable");
-	this.setSize(600, 140);						    
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("JTable");
+		this.setSize(600, 140);						    
 	
-	Object[][] data = {
-	    {"Cysboy", "6boy", new Double(1.80), new Boolean(true)},
-	    {"BZHHydde", "BZH", new Double(1.78), new Boolean(false)},
-	    {"IamBow", "BoW", new Double(1.90), new Boolean(false)},
-	    {"FunMan", "Year", new Double(1.85), new Boolean(true)}
-	};
+		Object[][] data = {
+			{"Cysboy", "6boy", new Double(1.80), new Boolean(true)},
+			{"BZHHydde", "BZH", new Double(1.78), new Boolean(false)},
+			{"IamBow", "BoW", new Double(1.90), new Boolean(false)},
+			{"FunMan", "Year", new Double(1.85), new Boolean(true)}
+		};
 
 
-	String title[] = {"Pseudo", "Age", "Taille","toto"};
-	ModelTable model = new ModelTable(data, title);
-	this.tableau = new JTable(model);      
+		String title[] = {"Pseudo", "Age", "Taille","toto"};
+		ModelTable model = new ModelTable(data, title);
+		this.tableau = new JTable(model);      
 	
-    this.tableau.setRowHeight(30);
+		this.tableau.setRowHeight(30);
 	
-    this.tableau.getColumn("Age").setCellRenderer(new ButtonRenderer());
+		this.tableau.getColumn("Age").setCellRenderer(new ButtonRenderer());
 	
-    this.tableau.getColumn("Age").setCellEditor(new ButtonEditor(new JCheckBox()));
+		this.tableau.getColumn("Age").setCellEditor(new ButtonEditor(new JCheckBox()));
 	
-    //On définit l'éditeur par défaut pour la cellule en lui spécifiant quel type d'affichage prendre en compte
+		//On définit l'éditeur par défaut pour la cellule en lui spécifiant quel type d'affichage prendre en compte
 	
-    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+		this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	
     }
     
     public static void main(String[] args){
-	Fenetre fen = new Fenetre();
-	fen.setVisible(true); 
+		Fenetre fen = new Fenetre();
+		fen.setVisible(true); 
     }
 }

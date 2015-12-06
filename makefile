@@ -18,7 +18,7 @@ compileTest:$(SRC)/ModelTable.java $(SRC)/Fenetre.java $(SRC)/TableComponent.jav
 compileTest2: $(SRC)/menu_test1.java $(SRC)/Fenetre1.java $(SRC)/menu_test1Info.java
 	javac $(CFLAGS) $^
 
-compileProg: $(SRC)/FenetrePrincipal.java $(SRC)/menuPrincipalInfoRecette.java
+compileProg: $(SRC)/FenetrePrincipal.java $(SRC)/menuPrincipalInfoRecette.java $(SRC)/ButtonRenderer.java $(SRC)/ModelTable.java $(SRC)/TableComponent.java $(SRC)/ButtonEditor.java $(SRC)/RecetteInfo.java $(SRC)/DialogDetailRecette.java
 	javac $(CFLAGS) $^
 
 
