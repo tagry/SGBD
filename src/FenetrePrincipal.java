@@ -50,7 +50,6 @@ private void initComponent(){
 	JPanel panRecette = new JPanel();
 
 	//parametrage tableau(boutons)
-	this.tableau.setRowHeight(InfoRecette.longueurTableau);
 	tableau.getTableHeader().setReorderingAllowed(false) ;
 	this.tableau.getColumn("Nom Recette").setCellRenderer(new ButtonRenderer());
 	this.tableau.getColumn("Nom Recette").setCellEditor(new ButtonEditor(new JCheckBox()));
