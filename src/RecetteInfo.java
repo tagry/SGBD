@@ -14,7 +14,7 @@ public class RecetteInfo{
 
 	public	RecetteInfo(Object numeroRecette)
 		{
-		    this.numeroRecette = (String)numeroRecette;
+		    //this.numeroRecette = (String)numeroRecette;
 			requete();
 		}
 

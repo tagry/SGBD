@@ -44,6 +44,10 @@ public class DialogMesRecettes extends JFrame {
 		JPanel panOk = new JPanel();
 		JButton ok = new JButton("Revenir à la recherche");
 
+		JPanel panAdd = new JPanel();
+		JButton buttonAdd = new JButton("Ajouter Recette");
+		panAdd.add(buttonAdd);
+
 		tableau.getColumn("M").setCellRenderer(new ButtonRenderer());
 		tableau.getColumn("M").setCellEditor(new ButtonEditor(new JCheckBox()));
 
@@ -59,10 +63,19 @@ public class DialogMesRecettes extends JFrame {
 				}
   
 			});
+
+		buttonAdd.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0) {
+					DialogAdd dAdd = new DialogAdd();
+				}
+  
+			});
+		
 		this.tableau.setRowHeight(InfoMesRecettes.nombre_ligne);
 		new JScrollPane(tableau, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		tableau.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		this.getContentPane().add(ok, BorderLayout.SOUTH);
+		this.getContentPane().add(panAdd, BorderLayout.EAST);
 		this.getContentPane().add(new JScrollPane(tableau));
 	}
 }

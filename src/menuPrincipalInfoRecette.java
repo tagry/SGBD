@@ -40,13 +40,18 @@ public class menuPrincipalInfoRecette{
 	
 	public int requete()
 		{
-			try{
-				Requete rq = new Requete ();
+			int i = 0;
+			int j = 0;
+
+			for(i = 0; i < 50; i++)
+			{
+				for(j = 0; j < 13; j++)
+				{
+					tableau[i][j] = i;
+				}
 			}
-			catch (Exception e) {
-				System.out.println(e.toString());
-			}
-			return 1;
+
+			return 50;
 			
 		}
 
