@@ -23,9 +23,9 @@ import javax.swing.JCheckBox;
 import java.awt.Window;
 import java.awt.FlowLayout;
 
-public class DialogDetailRecette extends JFrame {
-	private JPanel panOk;
-	public DialogDetailRecette(RecetteInfo infoRecette)
+public class DialogNote extends JFrame {
+
+	public DialogNote()
 		{
 			this.setTitle("Ma JFrame");
 			this.setSize(5000, 5000);
@@ -37,39 +37,36 @@ public class DialogDetailRecette extends JFrame {
 		}
 
 	private void initComponent(){
-		JPanel panOk = new JPanel();
-		JButton ok = new JButton("Revenir à la recherche");
-		panOk.setBackground(Color.white);
-		panOk.setPreferredSize(new Dimension(5000, 50));
-		panOk.add(ok);
+		JPanel control = new JPanel();
+		JButton ok = new JButton("Ok");
+		JButton annuler = new JButton("Annuler");
+		control.setBackground(Color.white);
+		control.setPreferredSize(new Dimension(5000, 50));
+		control.add(ok);
+		control.add(annuler);
 
-				//panneau de données
-		JPanel panDonnees = new JPanel();
-		panDonnees.setLayout(new FlowLayout());
-		ResultatStat Info = new ResultatStat("1");
-		JLabel label= new JLabel("Données");
-		panDonnees.add(label);
-
-		JButton note = new JButton("Noter le recette");
-		panOk.add(note);
-
-		note.addActionListener(new ActionListener(){
+		ok.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
-					DialogNote Dnote = new DialogNote();
+					dispose();
 				}
 				
 			});
 		
-		ok.addActionListener(new ActionListener(){
+		annuler.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
 					dispose();	
 				}
   
 			});
 
+		//panneau de données
+		JPanel panDonnees = new JPanel();
+		panDonnees.setLayout(new FlowLayout());
+		ResultatStat Info = new ResultatStat("1");
+		JLabel label= new JLabel("Données Eleve");
+		panDonnees.add(label);
 		
-		
-		this.getContentPane().add(panOk, BorderLayout.SOUTH);
+		this.getContentPane().add(control, BorderLayout.SOUTH);
 		this.getContentPane().add(panDonnees,BorderLayout.CENTER);
 	}
 }
