@@ -47,7 +47,7 @@ public class DialogStat extends JFrame {
 		//panneau de données
 		JPanel panDonnees = new JPanel();
 		panDonnees.setLayout(new FlowLayout());
-		ResultatStat Info = new ResultatStat("1");
+		ResultatStat Info = new ResultatStat();
 		JLabel label= new JLabel("Données");
 		panDonnees.add(label);
 		

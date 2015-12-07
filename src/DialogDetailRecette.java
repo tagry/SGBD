@@ -46,7 +46,7 @@ public class DialogDetailRecette extends JFrame {
 				//panneau de données
 		JPanel panDonnees = new JPanel();
 		panDonnees.setLayout(new FlowLayout());
-		ResultatStat Info = new ResultatStat("1");
+		RecetteInfo Info = new RecetteInfo("1");
 		JLabel label= new JLabel("Données");
 		panDonnees.add(label);
 

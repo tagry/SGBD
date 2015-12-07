@@ -25,6 +25,8 @@ import java.awt.FlowLayout;
 
 public class DialogNote extends JFrame {
 
+	private JLabel noteGLabel,noteBLabel,noteDLabel ;
+	
 	public DialogNote()
 		{
 			this.setTitle("Ma JFrame");
@@ -37,6 +39,48 @@ public class DialogNote extends JFrame {
 		}
 
 	private void initComponent(){
+		JPanel parametre = new JPanel();
+
+		JPanel panNoteG = new JPanel();
+		JComboBox CnoteG = new JComboBox();
+		CnoteG.addItem(0);
+		CnoteG.addItem(1);
+		CnoteG.addItem(2);
+		CnoteG.addItem(3);
+		CnoteG.addItem(4);
+		CnoteG.addItem(5);
+		noteGLabel = new JLabel("Note Gastronomique");
+		panNoteG.add(noteGLabel);
+		panNoteG.add(CnoteG);
+
+		JPanel panNoteB = new JPanel();
+		JComboBox CnoteB = new JComboBox();
+		CnoteB.addItem(0);
+		CnoteB.addItem(1);
+		CnoteB.addItem(2);
+		CnoteB.addItem(3);
+		CnoteB.addItem(4);
+		CnoteB.addItem(5);
+		noteGLabel = new JLabel("Note Respect du Budjet");
+		panNoteB.add(noteBLabel);
+		panNoteB.add(CnoteB);
+
+		JPanel panNoteD = new JPanel();
+		JComboBox CnoteD = new JComboBox();
+		CnoteD.addItem(0);
+		CnoteD.addItem(1);
+		CnoteD.addItem(2);
+		CnoteD.addItem(3);
+		CnoteD.addItem(4);
+		CnoteD.addItem(5);
+		noteGLabel = new JLabel("Note Respect de la Difficulté");
+		panNoteD.add(CnoteD);
+
+		parametre.add(panNoteG);
+		parametre.add(panNoteB);
+		parametre.add(panNoteD);
+
+		
 		JPanel control = new JPanel();
 		JButton ok = new JButton("Ok");
 		JButton annuler = new JButton("Annuler");
@@ -47,6 +91,7 @@ public class DialogNote extends JFrame {
 
 		ok.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
+					ResultatNote Info = new ResultatNote(1,2,3);
 					dispose();
 				}
 				
@@ -59,14 +104,7 @@ public class DialogNote extends JFrame {
   
 			});
 
-		//panneau de données
-		JPanel panDonnees = new JPanel();
-		panDonnees.setLayout(new FlowLayout());
-		ResultatStat Info = new ResultatStat("1");
-		JLabel label= new JLabel("Données Eleve");
-		panDonnees.add(label);
-		
 		this.getContentPane().add(control, BorderLayout.SOUTH);
-		this.getContentPane().add(panDonnees,BorderLayout.CENTER);
+		this.getContentPane().add(parametre,BorderLayout.CENTER);
 	}
 }

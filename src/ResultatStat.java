@@ -14,13 +14,13 @@ public class ResultatStat{
 
 	public	ResultatStat()
 		{
-		    this.numeroEleve = (String)numeroEleve;
+		    
 			requete();
 		}
 
 	public void requete()
 		{
-			System.out.println("\nRequete vers Eleve " +numeroEleve +" effectué");
+			System.out.println("\nRequete vers Stat effectuer");
 		}
 
 }
