@@ -1,8 +1,8 @@
 import javax.swing.JOptionPane;
 
 public class menuPrincipalInfoRecette{
-	private String nomR = null, nomE = null, categorie = "T";
-	private int prixMin = -1, prixMax = -1, difficulter = -1,tempsMax = -1, trie = -1;
+	String nomR = null, nomE = null, categorie = "T";
+	int prixMin = -1, prixMax = -1, difficulter = -1,tempsMax = -1, trie = -1;
 	Object[][] tableau = new Object[5000][13];
 	int longueurTableau;
 

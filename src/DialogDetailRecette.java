@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.JCheckBox;
 import java.awt.Window;
+import java.awt.FlowLayout;
 
 public class DialogDetailRecette extends JFrame {
 	private JPanel panOk;
@@ -39,15 +40,29 @@ public class DialogDetailRecette extends JFrame {
 		JPanel panOk = new JPanel();
 		JButton ok = new JButton("Revenir à la recherche");
 		panOk.setBackground(Color.white);
-		panOk.setPreferredSize(new Dimension(5000, 200));
+		panOk.setPreferredSize(new Dimension(5000, 50));
 		panOk.add(ok);
+
+				//panneau de données
+		JPanel panDonnees = new JPanel();
+		panDonnees.setLayout(new FlowLayout());
+		ResultatStat Info = new ResultatStat("1");
+		JLabel label= new JLabel("Données");
+		panDonnees.add(label);
+
+		JButton note = new JButton("Noter le recette");
+		panOk.add(note);
+		
 		ok.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
 					dispose();	
 				}
   
 			});
+
 		
-		this.getContentPane().add(ok, BorderLayout.SOUTH);
+		
+		this.getContentPane().add(panOk, BorderLayout.SOUTH);
+		this.getContentPane().add(panDonnees,BorderLayout.CENTER);
 	}
 }

@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.JCheckBox;
 import java.awt.Window;
+import java.awt.Graphics;
 import java.awt.FlowLayout;
 
 public class DialogStat extends JFrame {
@@ -48,7 +49,8 @@ public class DialogStat extends JFrame {
 		panDonnees.setLayout(new FlowLayout());
 		ResultatStat Info = new ResultatStat("1");
 		JLabel label= new JLabel("Données");
-		label.setHorizontalTextPosition(10);
+		panDonnees.add(label);
+		
 
 		panDonnees.add(label);
 		
@@ -60,6 +62,6 @@ public class DialogStat extends JFrame {
 			});
 
 		this.getContentPane().add(ok, BorderLayout.SOUTH);
-		this.getContentPane().add(label,BorderLayout.CENTER);
+		this.getContentPane().add(panDonnees,BorderLayout.CENTER);
 	}
 }

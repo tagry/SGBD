@@ -24,7 +24,7 @@ import java.awt.Window;
 import javax.swing.JTable;
 
 public class DialogMesRecettes extends JFrame {
-	private JPanel panOk;
+	JPanel panOk;
 	String title[] = {"Nom","Note Gastronomique", "Note Budget", "Note Difficulté", "M", "S"};
 	ResultatMesRecettes InfoMesRecettes = new ResultatMesRecettes();
 	ModelTable model = new ModelTable(InfoMesRecettes.tableau, title);
