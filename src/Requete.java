@@ -6,7 +6,6 @@ public class Requete {
 	OracleDataSource ods = new OracleDataSource();
 	Connection conn = null;
 	
-
 	/**
 	 * Requete Constructeur
 	 *
@@ -19,6 +18,7 @@ public class Requete {
         
         // URL de connexion.
         ods.setURL("jdbc:oracle:thin:@localhost:1521/oracle");
+        conn = ods.getConnection();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class Requete {
 	 */
 	public void rechercheEleve (int numEleve) {
 		String query = 
-			"select NOM_ELEVE, PRENOM_ELEVE, count(*) NOMBRE_DE_RECETTE, "
+			"select NOM_ELEVE, PRENOM_ELEVE, count(NOM_ELEVE) NOMBRE_DE_RECETTE, "
 			+"avg(BUDGET) MOYENNE_BUDGET "
 			+"from ELEVE E, RECETTE R "
 			+"where E.NUMERO_ELEVE = R.NUMERO_CREATEUR "

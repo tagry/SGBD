@@ -3,40 +3,17 @@ import oracle.jdbc.pool.OracleDataSource;
 
 public class Exemple {
 
-    
-
-    public static OracleDataSource initConnexion () throws SQLException, ClassNotFoundException, java.io.IOException {
-        OracleDataSource ods = new OracleDataSource(); 
-
-        // Preparation de la connexion.
-        
-        ods.setUser("wsoulaimana");
-        ods.setPassword("wsoulaimana");
-        
-        // URL de connexion.
-        ods.setURL("jdbc:oracle:thin:@localhost:1521/oracle");
-	return ods;
-    }
-
-
-
-
-    public Exemple()
+    public static void main (String[] args)
     throws SQLException, ClassNotFoundException, java.io.IOException {
-
-        // Lancement de la connexion
-        OracleDataSource ods = initConnexion();
-
-        Connection conn = null;
         
         try {
 
-            Requete rq = new Requete (ods);
-
+            Requete rq = new Requete ();
+            System.out.println("Je suis connecté !!");
             //rechercheRecette(nomRct,categ,tri,prixMin,prixMax,difficulteMax,tempsMax)
-            //rq.rechercheRecette(null,"T", -1, -1, -1, -1, -1);
-            
-            //rechercheEleve(numEleve)
+            rq.rechercheRecette(null,"T", -1, -1, -1, -1, -1);
+            menu();
+            rq.rechercheEleve(1);
             //rq.rechercheEleve(2);
 
             //Statistiques
@@ -56,12 +33,16 @@ public class Exemple {
             rq.utilisateur(3);
             rq.recette("CREPE");*/
 
+        } 
+        catch (Exception e){
+            System.out.println("Ca ne marche pas. Dommage !!");
         }
+    }
 
-        finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
+    public int menu () {
+        String title = "|----------- BDD RECETTE------------"
+                    + "\n menu :";
+        System.out.print(title);
+        return 0;
     }
 }
