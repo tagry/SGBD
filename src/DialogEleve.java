@@ -52,7 +52,7 @@ public class DialogEleve extends JFrame {
 		//panneau de données
 		JPanel panDonnees = new JPanel();
 		panDonnees.setLayout(new FlowLayout());
-		ResultatStat Info = new ResultatStat("1");
+		ResultatEleve Info = new ResultatEleve("1");
 		JLabel label= new JLabel("Données Eleve");
 		panDonnees.add(label);
 		

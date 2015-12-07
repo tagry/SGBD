@@ -40,7 +40,7 @@ public class DialogNote extends JFrame {
 
 	private void initComponent(){
 		JPanel parametre = new JPanel();
-
+		
 		JPanel panNoteG = new JPanel();
 		JComboBox CnoteG = new JComboBox();
 		CnoteG.addItem(0);
@@ -61,7 +61,7 @@ public class DialogNote extends JFrame {
 		CnoteB.addItem(3);
 		CnoteB.addItem(4);
 		CnoteB.addItem(5);
-		noteGLabel = new JLabel("Note Respect du Budjet");
+		noteBLabel = new JLabel("Note Respect du Budjet");
 		panNoteB.add(noteBLabel);
 		panNoteB.add(CnoteB);
 
@@ -73,7 +73,8 @@ public class DialogNote extends JFrame {
 		CnoteD.addItem(3);
 		CnoteD.addItem(4);
 		CnoteD.addItem(5);
-		noteGLabel = new JLabel("Note Respect de la Difficulté");
+		noteDLabel = new JLabel("Note Respect de la Difficulté");
+		panNoteD.add(noteDLabel);
 		panNoteD.add(CnoteD);
 
 		parametre.add(panNoteG);
