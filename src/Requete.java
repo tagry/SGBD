@@ -7,7 +7,7 @@ public class Requete {
 	
 
 	/**
-	 * Constructeur
+	 * Requete Constructeur
 	 *
 	 * @param    ods	Oracle Database Source
 	 */
@@ -20,27 +20,9 @@ public class Requete {
 		}
 	}
 
-
 	/**
 	 * rechercheRecette
-	 *
-	 * @param    nom	nom de la recette
-	 * @param categorie 
-	 * @param tri
-	 * 	0 Prix croissant, 1 Prix decroissant, 2 Durée croissante, 3 Durée decroissante
-	 *	4 du Plus commenté, 5 du Moin commenté, -1 Non renseigné (alphabétique par défaut)
-	 * @param prixMin	-1 si Non renseigné
-	 * @param prixMAx	-1 si Non renseigné
-	 * @param difficulteMax	-1 si Non renseigné
-	 * @param tempsMax 	
-	 * 	temps préparation + cuisson
-	 * 	-1 si Non renseigné
-	 *
-	 * @return 
-	 * 	
-	 */
-	/**
-	 * rechercheRecette
+	 * 	Donne les différentes recettes correspondant au critères de recherche.
 	 *
 	 * @param      nomRecette     nom de la recette
 	 * @param      categorie      categorie de la recette
@@ -66,13 +48,15 @@ public class Requete {
 		String query = 
 			"select NOM_RECETTE, NOM_ELEVE NOM_CREATEUR, NUMERO_CREATEUR, "
 			+"CATEGORIE, BUDGET, DIFFICULTE, "
-			+"TEMPS_DE_PREPARATION + TEMPS_DE_CUISSON as TEMPS, "
-			+" NOTE_GASTRONOMIQUE, NOTE_BUDGET, NOTE_DIFFICULTE "
+			+"TEMPS_DE_PREPARATION + TEMPS_DE_CUISSON as TEMPS "
+			//+"NOTE_GASTRONOMIQUE, NOTE_BUDGET, NOTE_DIFFICULTE "
 
-			+"from ELEVE E, RECETTE R, NOTE N "
+			//+"NUMERO_NOTE, R.NUMERO_RECETTE, N.NUMERO_RECETTE "//COM
+
+			+"from ELEVE E, RECETTE R "//, NOTE N "
 			
 			+"where E.NUMERO_ELEVE = R.NUMERO_CREATEUR "
-			+"and R.NUMERO_RECETTE = N.NUMERO_RECETTE "
+//			+"and R.NUMERO_RECETTE = N.NUMERO_RECETTE ";
 
 			// positionnement des paramètres
 			+"and R.NOM_RECETTE like ? "
@@ -85,14 +69,15 @@ public class Requete {
 		switch (tri) {
 			case 0: query += "order by BUDGET asc "; break;
 			case 1: query += "order by BUDGET desc "; break;
-			case 2: query += "order by DIFFICULTE asc "; break;
-			case 3: query += "order by DIFFICULTE desc "; break;
+			case 2: query += "order by TEMPS asc "; break;
+			case 3: query += "order by TEMPS desc "; break;
 			case 4: query += "order by NOTE_GASTRONOMIQUE asc"; break;
 			case 5: query += "order by NOTE_GASTRONOMIQUE desc "; break;
 			default: query += "order by NOM_RECETTE "; break;
 		}
 
 		try {
+			//System.out.println(query);
 			PreparedStatement stmt = conn.prepareStatement(query);
 
 			// Affectation des paramètres
@@ -124,8 +109,9 @@ public class Requete {
 
 	/**
 	 * rechercheEleve
+	 * 	Donne des details sur un élève en le retrouvant par son numéro d'élève.
 	 *
-	 * @param      numEleve  entier correspondant au numero de l'eleve recherché
+	 * @param    numEleve  entier correspondant au numero de l'eleve recherché
 	 * 
 	 * @return   tableau contenant
 	 * 	Nom élève, Prénom élève, 
@@ -147,15 +133,167 @@ public class Requete {
 			// Affectation des paramètres
 			stmt.setInt(1, numEleve);
 
-			System.out.println(query);
 			ResultSet rset = stmt.executeQuery();
 			print(rset);
 		}
 		catch (Exception e) {
-			System.out.println(query);
 			System.out.println(e.toString());
 		}
 	}
+
+	/**
+	 * statistique
+	 * 	lance les différentes requêtes d'ordre statistiques: 
+	 * 	nbRecette()
+	 * 	dessertRapide()
+	 */
+	public void statistique () {
+		nbRecette();
+		dessertRapide();
+		rapportQP();
+	}
+
+	/**
+	 * nbRecette	
+	 * 	Donne le nombre de recette total dans la BDD pour chaque catégorie.
+	 */
+	public void nbRecette () {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(
+				"select CATEGORIE, count(CATEGORIE) from RECETTE group by CATEGORIE ");
+			ResultSet rset = stmt.executeQuery();
+			print(rset);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	/**
+	 * dessertRapide
+	 * 	Classe les desserts du plus rapide au plus long a réaliser.
+	 */
+	public void dessertRapide () {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(
+				"select * from RECETTE order by TEMPS_DE_PREPARATION + TEMPS_DE_CUISSON");
+			ResultSet rset = stmt.executeQuery();
+			print(rset);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	/**
+	 * rapportQP
+	 * 	Classe les recette par leur rapport qualité/prix.
+	 * 	Le rapport est calculé ainsi:
+	 * 		r = moyenne note(gastronomique + budget + difficulté) / prix
+	 */
+	public void rapportQP () {
+		String query =
+			"select NOM_RECETTE, CATEGORIE, BUDGET, "
+			+"avg(NOTE_GASTRONOMIQUE + NOTE_DIFFICULTE + NOTE_BUDGET) NOTE "
+			+"from RECETTE R, NOTE N "
+			+"where N.NUMERO_RECETTE = R.NUMERO_RECETTE";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+				
+			ResultSet rset = stmt.executeQuery();
+			print(rset);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	public void ajoutRecette (int numCreateur, String nomRecette,
+		String categorie, int difficulte, int budget,
+		int preparation, int cuisson, int nbPersonne) {
+
+		int nbRct = getNbRct();
+
+		String query = 
+			"insert into RECETTE values "
+			+"(?, ?, ?, ?, ?, ?, ?, ?, ?) "; 
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			stmt.setInt(1, nbRct+1);
+			stmt.setInt(2, numCreateur);
+			stmt.setString(3, nomRecette.toUpperCase());
+			stmt.setString(4, categorie.toUpperCase());
+			stmt.setInt(5, budget);
+			stmt.setInt(6, difficulte);
+			stmt.setInt(7, preparation);
+			stmt.setInt(8, cuisson);
+			stmt.setInt(9, nbPersonne);
+
+			ResultSet rset = stmt.executeQuery();
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+
+	}
+
+	public void ajoutAliment (String nomAlim, String unite) {
+		int nbAlim = getNbAlim();
+
+		String query = 
+			"insert into ALIMENT values "
+			+"(?, ?, ?) "; 
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			stmt.setInt(1, nbAlim+1);
+			stmt.setString(2, nomAlim.toUpperCase());
+			stmt.setString(3, unite.toUpperCase());
+
+			ResultSet rset = stmt.executeQuery();
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+
+	public int getNbRct () {
+		try {
+			PreparedStatement stmtNb = conn.prepareStatement(
+				"select count(*) from RECETTE");
+			ResultSet rset = stmtNb.executeQuery();
+			rset.next();
+			return rset.getInt(1);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+			return 0;
+		}
+	}
+
+	public int getNbAlim () {
+		try {
+			PreparedStatement stmtNb = conn.prepareStatement(
+				"select count(*) from ALIMENT");
+			ResultSet rset = stmtNb.executeQuery();
+			rset.next();
+			return rset.getInt(1);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+			return 0;
+		}
+	}
+
+
+
+
+
 
 	// To correct
 	public void utilisateur (String nomEleve) {
@@ -208,7 +346,7 @@ public class Requete {
 			while (rset.next()){
 	            for (int i = 1; i <= nbC; i++) {
 	            	if (i > 1) System.out.print(", ");
-	            	System.out.print(/*rset.getMetaData().getColumnName(i) +*/ " " + rset.getString(i));
+	            	System.out.print(" " + rset.getString(i));
 	        	}
 	        	System.out.println(" ");
 	    	}
@@ -218,5 +356,4 @@ public class Requete {
        		System.out.println(e.toString());
     	}
 	}
-
 }

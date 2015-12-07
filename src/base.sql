@@ -39,12 +39,13 @@ create table RECETTE
 (
     NUMERO_RECETTE              NUMBER(4)               not null,
     NUMERO_CREATEUR             NUMBER(4)               not null,
-    NOM_RECETTE                 VARCHAR(30)                not null,
+    NOM_RECETTE                 VARCHAR(30)             not null,
     CATEGORIE                   CHAR(1)                         ,
     BUDGET                      NUMBER(3)                       ,
     DIFFICULTE                  NUMBER(1)                       ,
     TEMPS_DE_PREPARATION        NUMBER(3)                       ,
     TEMPS_DE_CUISSON            NUMBER(3)                       ,
+	NOMBRE_DE_PERSONNE          NUMBER(2)                       ,
     constraint pk_recette primary key (NUMERO_RECETTE)
 );
 
@@ -90,8 +91,8 @@ create table COMPOSE
 (
     NUMERO_ALIMENT                  NUMBER(5)              not null,
     NUMERO_RECETTE                  NUMBER(4)              not null,
-    QUANTITE                        NUMBER(5)                      ,
-    MOT_CLE                         NUMBER(1)              not null,
+    QUANTITE                        NUMBER(5)              not null,
+    MOT_CLE                         NUMBER(1)                      ,
     constraint pk_compose primary key (NUMERO_ALIMENT, NUMERO_RECETTE)
 );
 
