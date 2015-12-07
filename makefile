@@ -1,7 +1,7 @@
 BUILD=./build
 SRC=./src
 CFLAGS=-d $(BUILD) -cp $(BUILD) -Xlint
-CFLAGS2=-cp $(BUILD)
+CFLAGS2=-cp $(BUILD) 
 FLAGS=-cp $(BUILD) -d $(BUILD)
 
 EXEC= run
@@ -18,7 +18,7 @@ compileTest:$(SRC)/ModelTable.java $(SRC)/Fenetre.java $(SRC)/TableComponent.jav
 compileTest2: $(SRC)/menu_test1.java $(SRC)/Fenetre1.java $(SRC)/menu_test1Info.java
 	javac $(CFLAGS) $^
 
-compileProg: $(SRC)/FenetrePrincipal.java $(SRC)/menuPrincipalInfoRecette.java $(SRC)/ButtonRenderer.java $(SRC)/ModelTable.java $(SRC)/TableComponent.java $(SRC)/ButtonEditor.java $(SRC)/RecetteInfo.java $(SRC)/DialogDetailRecette.java $(SRC)/DialogStat.java $(SRC)/DialogEleve.java $(SRC)/ResultatEleve.java	$(SRC)/DialogMesRecettes.java $(SRC)/ResultatMesRecettes.java $(SRC)/ResultatStat.java $(SRC)/DialogNote.java
+compileProg: $(SRC)/FenetrePrincipal.java $(SRC)/menuPrincipalInfoRecette.java $(SRC)/ButtonRenderer.java $(SRC)/ModelTable.java $(SRC)/TableComponent.java $(SRC)/ButtonEditor.java $(SRC)/RecetteInfo.java $(SRC)/DialogDetailRecette.java $(SRC)/DialogStat.java $(SRC)/DialogEleve.java $(SRC)/ResultatEleve.java	$(SRC)/DialogMesRecettes.java $(SRC)/ResultatMesRecettes.java $(SRC)/ResultatStat.java $(SRC)/DialogNote.java $(SRC)/ResultatNote.java
 	javac $(CFLAGS) $^
 
 
