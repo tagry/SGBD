@@ -2,8 +2,9 @@ import java.sql.*;
 import oracle.jdbc.pool.OracleDataSource;
 
 public class Requete {
-	OracleDataSource ods;
-	Connection conn;
+
+	OracleDataSource ods = new OracleDataSource();
+	Connection conn = null;
 	
 
 	/**
@@ -11,13 +12,13 @@ public class Requete {
 	 *
 	 * @param    ods	Oracle Database Source
 	 */
-	Requete (OracleDataSource ods) {
-		this.ods = ods;
-		try{
-			this.conn = ods.getConnection();
-		} catch (Exception e) {
-			this.conn = null;
-		}
+	public Requete () {
+		// Preparation de la connexion.
+        ods.setUser("wsoulaimana");
+        ods.setPassword("wsoulaimana");
+        
+        // URL de connexion.
+        ods.setURL("jdbc:oracle:thin:@localhost:1521/oracle");
 	}
 
 	/**

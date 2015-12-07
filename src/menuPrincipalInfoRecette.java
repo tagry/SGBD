@@ -40,18 +40,8 @@ public class menuPrincipalInfoRecette{
 	
 	public int requete()
 		{
-			//Les données du tableau
-			int i = 0;
-			int j = 0;
-			for(i = 0;i < 50; i++)
-			{
-				for(j = 0;j <13; j++)
-				{
-					this.tableau[i][j] = "0";
-				}
-			}
-
-			return 50;
+			Requete rq = new Requete ();
+			
 		}
 
 	
@@ -82,22 +72,21 @@ public String getCategorie(String s)
 {
 	String s2;
 			
-	switch(s)
+	switch(s.length())
 	{
-	case "Entrée":
+	case 6://"Entrée":
 		s2 = "E";
 		break;
 
-	case "Plat":
+	case 4://"Plat":
+	    if(s2.equals("Plat"))
 		s2 = "P";
+	    else
+		s2 = "T";//tout
 		break;
 
-	case "Dessert":
+	case 7://"Dessert":
 		s2 = "D";
-		break;
-
-	case "Tout":
-		s2 = "T";
 		break;
 
 	default:
@@ -112,29 +101,28 @@ public int getTrie(String s)
 {
 	int i = -1;
 			
-	switch(s)
+	switch(s.length())
 	{
-	case "Prix Croissant":
+	case 14://"Prix Croissant":
 		i = 0;
 		break;
 				
-	case "Prix Décroissant":
+	case 16://"Prix Décroissant":
+	    if(s.equals("Prix Décroissant"))
 		i = 1;
-		break;
-				
-	case "Durée Croissante":
+	    else//durée croissante
 		i = 2;
-		break;
+	    break;
 				
-	case "Durée Décroissante":
+	case 18://"Durée Décroissante":
 		i = 3;
 		break;
 				
-	case "Le plus de commentaires":
+	case 23://"Le plus de commentaires":
 		i = 4;
 		break;
 				
-	case "Le moins de commentaires":
+	case 24://"Le moins de commentaires":
 		i = 5;
 		break;
 
@@ -146,39 +134,27 @@ public int getTrie(String s)
 	return i;
 }
 	
-public int getDifficulter(String s)
-{
+    public int getDifficulter(String s)
+    {
 	int i = 0;
 			
-	switch(s)
-	{
-	case "1/5":
-		i = 1;
-		break;
-				
-	case "2/5":
-		i = 2;
-		break;
-				
-	case "3/5":
-		i = 3;
-		break;
-				
-	case "4/5":
-		i = 4;
-		break;
-				
-	case "5/5":
-		i = 5;
-		break;
-				
-	default:
-		i = -1;
-		break;		   
-	}
-
+	if(s.equals("1/5"))
+	    i = 1;
+	else if(s.equals("2/5"))
+	    i = 2;
+	
+	else if(s.equals("3/5"))
+	    i = 3;
+	 
+	else if(s.equals("4/5"))
+	    i = 4;
+	
+	else if(s.equals("5/5"))
+	    i = 5;
+	else
+	    i = -1;
 	return i;
-}
+    }
 	
 public int getPrixMin(String s)
 {
