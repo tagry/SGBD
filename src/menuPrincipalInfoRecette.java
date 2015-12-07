@@ -40,7 +40,13 @@ public class menuPrincipalInfoRecette{
 	
 	public int requete()
 		{
-			Requete rq = new Requete ();
+			try{
+				Requete rq = new Requete ();
+			}
+			catch (Exception e) {
+				System.out.println(e.toString());
+			}
+			return 1;
 			
 		}
 
@@ -79,7 +85,7 @@ public String getCategorie(String s)
 		break;
 
 	case 4://"Plat":
-	    if(s2.equals("Plat"))
+	    if(s.equals("Plat"))
 		s2 = "P";
 	    else
 		s2 = "T";//tout

@@ -12,7 +12,7 @@ public class Requete {
 	 *
 	 * @param    ods	Oracle Database Source
 	 */
-	public Requete () {
+	public Requete () throws SQLException, ClassNotFoundException, java.io.IOException{
 		// Preparation de la connexion.
         ods.setUser("wsoulaimana");
         ods.setPassword("wsoulaimana");
