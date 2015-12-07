@@ -2,11 +2,15 @@ import javax.swing.JOptionPane;
 
 public class RecetteInfo{
 
-	//donné
-	private String numeroRecette;
-
-	//Resultat:
-	
+    //donné
+    String numeroRecette;
+    String nomRecette;
+    int moyenneNoteGastro;
+    int moyenneNoteBudget;
+    int moyenneNoteDifficulte;
+    int tempsPreparation;
+    int tempsCuisson;
+        	
 
 	public	RecetteInfo(Object numeroRecette)
 		{

@@ -3,14 +3,14 @@ import javax.swing.JOptionPane;
 public class ResultatEleve{
 
     //donné
-    private String numeroEleve;
-    private String nomEleve;
-    private String prenomEleve;
-    private int nbRecette;
-    private int budgetMoyen;
-    private int moyenneNoteGastro;
-    private int moyenneNoteBudg;
-    private int moyenneNoteDiffi;
+    String numeroEleve;
+    String nomEleve;
+    String prenomEleve;
+    int nbRecette;
+    int budgetMoyen;
+    int moyenneNoteGastro;
+    int moyenneNoteBudg;
+    int moyenneNoteDiffi;
 
 	public	ResultatEleve(Object numeroEleve)
 		{
