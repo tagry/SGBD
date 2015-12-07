@@ -25,14 +25,14 @@ import javax.swing.table.TableColumn;
 public class FenetrePrincipal extends JFrame {
     
     private menuPrincipalInfoRecette InfoRecette = new menuPrincipalInfoRecette();
-	String title[] = {"Nom Recette", "Numero Recette", "Nom Créateur", "Prenom Créateur", "Numero Créateur","Budget", "Difficulé", "Temps de Préparation", "Temps de Cuisson","Note Gastronomique", "Note Budget", "Note Difficulté" };
+	String title[] = {"Nom Recette", "Numero Recette", "Nom Créateur", "Prenom Créateur", "Numero Créateur","Budget", "Difficulé", "Temps de Préparation", "Temps de Cuisson","Note GETTABLEHEADERastronomique", "Note Budget", "Note Difficulté" };
 	ModelTable model = new ModelTable(InfoRecette.tableau, title);
 	JTable tableau = new JTable(model);
     private boolean sendData;
-    private JLabel nomLabel, prixMinLabel, prixMaxLabel, tempsMaxLabel;
+    private JLabel nomRLabel, nomELabel, prixMinLabel, prixMaxLabel, tempsMaxLabel;
     private ArrayList<JRadioButton> nomArray;
     private JComboBox categorie, trie, difficulter;
-    private JTextField nom,prixMin,prixMax, tempsMax;
+    private JTextField nomR, nomE,prixMin,prixMax, tempsMax;
     private JButton rechercherRecette, stat, mesRecettes;
 
     
@@ -50,6 +50,7 @@ private void initComponent(){
 	JPanel panRecette = new JPanel();
 
 	//parametrage tableau(boutons)
+	this.tableau.setRowHeight(InfoRecette.longueurTableau);
 	tableau.getTableHeader().setReorderingAllowed(false) ;
 	this.tableau.getColumn("Nom Recette").setCellRenderer(new ButtonRenderer());
 	this.tableau.getColumn("Nom Recette").setCellEditor(new ButtonEditor(new JCheckBox()));
@@ -58,25 +59,35 @@ private void initComponent(){
 	this.tableau.getColumn("Nom Créateur").setCellEditor(new ButtonEditor(new JCheckBox()));
 
 	
-	panRecette.setPreferredSize(new Dimension(250, 600));
+	panRecette.setPreferredSize(new Dimension(300, 600));
 	panRecette.setBackground(Color.white);
 
 		
 		
-	//nom:
-	JPanel panNom = new JPanel();
-	nom = new JTextField();
-	panNom.setPreferredSize(new Dimension(250,30));
-	nom.setPreferredSize(new Dimension(150, 25));
-	nomLabel = new JLabel("Nom :");
-	panNom.setBackground(Color.white);
-	panNom.add(nomLabel);
-	panNom.add(nom);
+	//nomR:
+	JPanel panNomR = new JPanel();
+	nomR = new JTextField();
+	panNomR.setPreferredSize(new Dimension(300,30));
+	nomR.setPreferredSize(new Dimension(150, 25));
+	nomRLabel = new JLabel("Nom Recette:");
+	panNomR.setBackground(Color.white);
+	panNomR.add(nomRLabel);
+	panNomR.add(nomR);
+
+		//nomE:
+	JPanel panNomE = new JPanel();
+	nomE = new JTextField();
+	panNomE.setPreferredSize(new Dimension(300,30));
+	nomE.setPreferredSize(new Dimension(150, 25));
+	nomELabel = new JLabel("Nom Etudiant :");
+	panNomE.setBackground(Color.white);
+	panNomE.add(nomELabel);
+	panNomE.add(nomE);
 
 	//categorie:
 	JPanel panCategorie = new JPanel();
 	panCategorie.setBackground(Color.white);
-	panCategorie.setPreferredSize(new Dimension(250, 100));
+	panCategorie.setPreferredSize(new Dimension(300, 100));
 	categorie = new JComboBox();
 	categorie.addItem("Categorie");
 	categorie.addItem("Entrée");
@@ -88,7 +99,7 @@ private void initComponent(){
 	//trie:
 	JPanel panTrie = new JPanel();
 	panTrie.setBackground(Color.white);
-	panTrie.setPreferredSize(new Dimension(250, 100));
+	panTrie.setPreferredSize(new Dimension(300, 100));
 	trie = new JComboBox();
 	trie.addItem("Trier");
 	trie.addItem("Prix Croissant");
@@ -102,7 +113,7 @@ private void initComponent(){
 	//Prix min
 	JPanel panPrixMin = new JPanel();
 	prixMin = new JTextField();
-	panPrixMin.setPreferredSize(new Dimension(250,50));
+	panPrixMin.setPreferredSize(new Dimension(300,50));
 	prixMin.setPreferredSize(new Dimension(150, 25));
 	prixMinLabel = new JLabel("PrixMin :");
 	panPrixMin.setBackground(Color.white);
@@ -112,7 +123,7 @@ private void initComponent(){
 	//Prix max
 	JPanel panPrixMax = new JPanel();
 	prixMax = new JTextField();
-	panPrixMax.setPreferredSize(new Dimension(250,50));
+	panPrixMax.setPreferredSize(new Dimension(300,50));
 	prixMax.setPreferredSize(new Dimension(150, 25));
 	prixMaxLabel = new JLabel("PrixMax :");
 	panPrixMax.setBackground(Color.white);
@@ -122,7 +133,7 @@ private void initComponent(){
 	//difficulter
 	JPanel panDifficulter = new JPanel();
 	difficulter = new JComboBox();
-	panDifficulter.setPreferredSize(new Dimension(250,100));
+	panDifficulter.setPreferredSize(new Dimension(300,100));
 	panDifficulter.setBackground(Color.white);
 	difficulter.addItem("Difficulté");
 	difficulter.addItem("1/5");
@@ -135,7 +146,7 @@ private void initComponent(){
 	//Tempsmax
 	JPanel panTempsMax = new JPanel();
 	tempsMax = new JTextField();
-	panTempsMax.setPreferredSize(new Dimension(250,50));
+	panTempsMax.setPreferredSize(new Dimension(300,50));
 	tempsMax.setPreferredSize(new Dimension(150, 25));
 	tempsMaxLabel = new JLabel("TempsMax :");
 	panTempsMax.setBackground(Color.white);
@@ -156,6 +167,13 @@ private void initComponent(){
 	mesRecettes = new JButton("Mes Recettes");
 	panMesRecettes.add(mesRecettes);
 
+	//action du bouton pour mes recettes
+	mesRecettes.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				DialogMesRecettes dialogMesrecettes = new DialogMesRecettes();
+			}
+		});
+
 	//action du bouton Statistique
 	stat.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {        
@@ -168,7 +186,7 @@ private void initComponent(){
 	//action du bouton recherche
 	rechercherRecette.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {        
-				InfoRecette = new menuPrincipalInfoRecette(nom.getText(), (String)categorie.getSelectedItem(),(String)trie.getSelectedItem(), prixMin.getText(), prixMax.getText(), (String)difficulter.getSelectedItem(), tempsMax.getText());
+				InfoRecette = new menuPrincipalInfoRecette(nomR.getText(), nomE.getText(), (String)categorie.getSelectedItem(),(String)trie.getSelectedItem(), prixMin.getText(), prixMax.getText(), (String)difficulter.getSelectedItem(), tempsMax.getText());
 
 				if(InfoRecette.changer)
 				{
@@ -211,7 +229,8 @@ private void initComponent(){
 					
 					col = tableau.getColumnModel().getColumn(2);
 					col.setPreferredWidth(200);
-		
+
+					tableau.setRowHeight(30);
 					tableau.setModel(model);
 					tableau.getTableHeader().setReorderingAllowed(false) ;
 					tableau.getColumn("Nom Recette").setCellRenderer(new ButtonRenderer());
@@ -228,7 +247,8 @@ private void initComponent(){
 	control.add(rechercherRecette);
 
 
-	panRecette.add(panNom);
+	panRecette.add(panNomR);
+	panRecette.add(panNomE);
 	panRecette.add(panCategorie);
 	panRecette.add(panTrie);
 	panRecette.add(panDifficulter);
@@ -243,7 +263,6 @@ private void initComponent(){
 	//Sinon les titres des colonnes ne s'afficheront pas !
 
 	//Taille des colonnes !
-	
 	TableColumn col = tableau.getColumnModel().getColumn(0);
 	col.setPreferredWidth(200);
 	

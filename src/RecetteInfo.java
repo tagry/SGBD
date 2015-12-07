@@ -5,7 +5,8 @@ public class RecetteInfo{
 	//donné
 	private String numeroRecette;
 
-	//Resultat: [...]
+	//Resultat:
+	
 
 	public	RecetteInfo(Object numeroRecette)
 		{

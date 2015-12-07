@@ -61,17 +61,29 @@ public class ButtonEditor extends DefaultCellEditor {
 
 		public void actionPerformed(ActionEvent event) {
 			
-				if(table.getColumnName(this.column) == "Nom Recette")
+			if(table.getColumnName(this.column) == "Nom Recette")
 			{
 				infoRecette = new RecetteInfo(table.getValueAt(this.row, 2));
 				DialogDetailRecette fenetreRecette = new DialogDetailRecette(infoRecette);
 			}
 
-				if(table.getColumnName(this.column) == "Nom Créateur")
+			if(table.getColumnName(this.column) == "Nom Créateur")
 			{
 				infoEleve = new ResultatEleve(table.getValueAt(this.row, 4));
 				DialogEleve fenetreRecette = new DialogEleve(infoRecette);
-			}				
+			}
+
+			if(table.getColumnName(this.column) == "M")
+			{
+				infoEleve = new ResultatEleve(table.getValueAt(this.row, 4));
+				DialogEleve fenetreRecette = new DialogEleve(infoRecette);
+			}
+
+			if(table.getColumnName(this.column) == "S")
+			{
+				infoEleve = new ResultatEleve(table.getValueAt(this.row, 4));
+				DialogEleve fenetreRecette = new DialogEleve(infoRecette);
+			}
 	
 		}
 	}

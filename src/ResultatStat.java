@@ -1,13 +1,14 @@
 import javax.swing.JOptionPane;
+import java.awt.FlowLayout;
 
-public class ResultatEleve{
+public class ResultatStat{
 
 	//donné
 	private String numeroEleve;
 
 	//Resultat: [...]
 
-	public	ResultatEleve(Object numeroEleve)
+	public	ResultatStat(Object numeroEleve)
 		{
 		    this.numeroEleve = (String)numeroEleve;
 			requete();

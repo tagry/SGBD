@@ -1,26 +1,24 @@
 import javax.swing.JOptionPane;
 
 public class menuPrincipalInfoRecette{
-	private String nom, categorie;
-	private int prixMin, prixMax, difficulter,tempsMax, trie;
+	private String nomR = null, nomE = null, categorie = "T";
+	private int prixMin = -1, prixMax = -1, difficulter = -1,tempsMax = -1, trie = -1;
 	Object[][] tableau = new Object[5000][13];
+	int longueurTableau;
+
+	
 	boolean changer;
 
 	public menuPrincipalInfoRecette(){
 		int i = 0;
 		int j = 0;
-		for(i = 0;i < 50; i++)
-		{
-			for(j = 0;j <13; j++)
-			{
-				this.tableau[i][j] = "11212654654";
-			}
-		}
+	    longueurTableau = requete();
 		
 	}
 
-	public menuPrincipalInfoRecette(String nom, String categorie, String trie, String prixMin,String prixMax,String difficulter,String tempsMax){
-		this.nom = nom;
+	public menuPrincipalInfoRecette(String nomR, String nomE, String categorie, String trie, String prixMin,String prixMax,String difficulter,String tempsMax){
+		this.nomR = getNom(nomR);
+		this.nomE = getNom(nomE);
 		this.categorie = getCategorie(categorie);
 		this.trie = getTrie(trie);
 		this.prixMin = getPrixMin(prixMin);
@@ -30,7 +28,7 @@ public class menuPrincipalInfoRecette{
 
 		if(controlErreur())
 		{
-			requete();
+			longueurTableau = requete();
 			changer = true;
 		}
 		else
@@ -40,7 +38,7 @@ public class menuPrincipalInfoRecette{
 		
 	}
 	
-	public void requete()
+	public int requete()
 		{
 			//Les données du tableau
 			int i = 0;
@@ -52,6 +50,8 @@ public class menuPrincipalInfoRecette{
 					this.tableau[i][j] = "0";
 				}
 			}
+
+			return 50;
 		}
 
 	
@@ -68,6 +68,15 @@ public boolean controlErreur()
 		return true;
 	}
 }
+
+
+	public String getNom(String s)
+		{
+			if(s.length() == 0)
+				return null;
+			else
+				return s;
+		}
 	
 public String getCategorie(String s)
 {
