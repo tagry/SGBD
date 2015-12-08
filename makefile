@@ -39,5 +39,6 @@ expl: cmplEx
 
 cmplEx:$(SRC)/Exemple.java $(SRC)/Requete.java
 	javac $(FLAGS) $^
+
 clean:
 	rm -rf $(BUILD)/*
