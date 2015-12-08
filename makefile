@@ -1,8 +1,8 @@
 BUILD=./build
 SRC=./src
 CFLAGS=-d $(BUILD) -cp $(BUILD):$(SRC) -Xlint
-CFLAGS2=-cp $(BUILD) 
-FLAGS=-cp $(BUILD) -d $(BUILD)
+CFLAGS2=-cp $(BUILD):$$CLASSPATH
+FLAGS=-cp $(BUILD):$$CLASSPATH -d $(BUILD)
 
 EXEC= run
 COMPILE=compile
@@ -34,10 +34,10 @@ run: compile
 prog: compileProg
 	java $(CFLAGS2) FenetrePrincipal
 
+expl: cmplEx
+	java $(CFLAGS2) Exemple
 
-
-rqt: $(SRC)/Exemple.java $(SRC)/Requete.java
-	javac $(FLAGS) $^ && java Exemple
-
+cmplEx:$(SRC)/Exemple.java $(SRC)/Requete.java
+	javac $(FLAGS) $^
 clean:
 	rm -rf $(BUILD)/*

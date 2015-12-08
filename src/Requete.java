@@ -1,5 +1,17 @@
+/**
+ * Dans ce fichier sont présentes les méthodes qui interagissent avec
+ * la base de donnée.
+ * 
+ * @author W.Soulaimana, N.Gourrin, T.Agry
+ * @version 1.0  
+ */
+
 import java.sql.*;
 import oracle.jdbc.pool.OracleDataSource;
+
+/**
+ * 
+ */
 
 public class Requete {
 
@@ -8,11 +20,21 @@ public class Requete {
 	
 	/**
 	 * Requete Constructeur
+	 * Ici nous simulons la connexion d'un utilisateur.
+	 * ******************************************************
+	 * Pour 'connecter un autre utilisateur que W.Soulaimana'
+	 * vous pouvez changer les lignes 38 et 39 afin de rentrer
+	 * vos login et mot de passe de connexion a SQL*Plus sur
+	 * la machine Oracle de l'école.
+	 * !! Il est recommandé de faire pareil dans Exemple.java
+	 * ******************************************************
 	 *
 	 * @param    ods	Oracle Database Source
 	 */
 	public Requete () throws SQLException, ClassNotFoundException, java.io.IOException{
-		// Preparation de la connexion.
+		//-------------------------------------
+		// Login et Mot de passe. A modifier.
+		// ------------------------------------
         ods.setUser("wsoulaimana");
         ods.setPassword("wsoulaimana");
         
@@ -30,7 +52,7 @@ public class Requete {
 	 * @param      tri            ordre d'affichage des resultats
 	 * 		0 Prix croissant, 1 Prix decroissant, 2 Durée croissante, 
 	 * 		3 Durée decroissante, 4 Note gastronomique croissante, 
-	 * 		5 Note gastronomique decroissante
+	 * 		5 Note gastronomique decroissante, 6 rappoert QP,
 	 * 		-1 Non renseigné (alphabétique par défaut)
 	 * @param      prixMin	      -1 si Non renseigné
 	 * @param      prixMax        -1 si Non renseigné
@@ -85,8 +107,8 @@ public class Requete {
 			if (nomRecette != null) stmt.setString(1,"%"+nomRecette.toUpperCase()+"%");
 			else stmt.setString(1,"%");
 
-			if (categorie != "T") stmt.setString(2, categorie);
-			else stmt.setString(2, "%");
+			if (categorie.toUpperCase().equals("T")) stmt.setString(2, "%");
+			else stmt.setString(2, categorie.toUpperCase());
 
 			if (prixMin > -1) stmt.setInt(3, prixMin);
 			else stmt.setInt(3,0);
@@ -119,14 +141,23 @@ public class Requete {
 	 * 	Nombre de recette de l'élève, Moyenne des prix de ses recettes.
 	 */
 	public void rechercheEleve (int numEleve) {
-		String query = 
-			"select NOM_ELEVE, PRENOM_ELEVE, count(NOM_ELEVE) NOMBRE_DE_RECETTE, "
-			+"avg(BUDGET) MOYENNE_BUDGET "
-			+"from ELEVE E, RECETTE R "
-			+"where E.NUMERO_ELEVE = R.NUMERO_CREATEUR "
-			+"and E.NUMERO_ELEVE = ? ";
-
-			query += "group by NOM_ELEVE, PRENOM_ELEVE ";
+		int i = nbRecetteEleve(numEleve);
+		String query;
+		if (i > 0){
+			query = 
+				"select NUMERO_ELEVE, NOM_ELEVE, PRENOM_ELEVE, count(NOM_ELEVE) NOMBRE_DE_RECETTE, "
+				+"avg(BUDGET) MOYENNE_BUDGET "
+				+"from ELEVE E, RECETTE R "
+				+"where E.NUMERO_ELEVE = R.NUMERO_CREATEUR "
+				+"and E.NUMERO_ELEVE = ? "
+				+"group by NUMERO_ELEVE, NOM_ELEVE, PRENOM_ELEVE ";
+		}
+		else{	
+			query =
+				"select NUMERO_ELEVE, NOM_ELEVE, PRENOM_ELEVE "
+				+"from ELEVE "
+				+"where NUMERO_ELEVE = ? ";
+		}
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
@@ -136,11 +167,76 @@ public class Requete {
 
 			ResultSet rset = stmt.executeQuery();
 			print(rset);
+			if (i<=0)
+				System.out.println("Cet élève n'a pas encore publié de recette\n");
 		}
 		catch (Exception e) {
 			System.out.println(e.toString());
 		}
 	}
+
+	public int nbRecetteEleve (int numEleve) {
+		String query = 
+			"select count(*) "
+			+"from ELEVE E, RECETTE R "
+			+"where E.NUMERO_ELEVE = R.NUMERO_CREATEUR "
+			+"and E.NUMERO_ELEVE = ? ";
+
+			//uery += "group by NUMERO_ELEVE ";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			// Affectation des paramètres
+			stmt.setInt(1, numEleve);
+
+			ResultSet rset = stmt.executeQuery();
+			//print(rset);
+			rset.next();
+			return rset.getInt(1);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+			return 0;
+		}
+	}
+
+	public void afficheRecette() {
+		rechercheRecette(null,"T", -1, -1, -1, -1, -1);
+	}
+
+	public void afficheEleve () {
+		String query = 
+			"select * "
+			+"from ELEVE E ";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			ResultSet rset = stmt.executeQuery();
+			print(rset);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+	public void afficheAliment () {
+		String query = 
+			"select * "
+			+"from ALIMENT ";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			ResultSet rset = stmt.executeQuery();
+			print(rset);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
 
 	/**
 	 * statistique
@@ -150,8 +246,7 @@ public class Requete {
 	 */
 	public void statistique () {
 		nbRecette();
-		dessertRapide();
-		rapportQP();
+		//rapportQP();
 	}
 
 	/**
@@ -170,44 +265,6 @@ public class Requete {
 		}
 	}
 
-	/**
-	 * dessertRapide
-	 * 	Classe les desserts du plus rapide au plus long a réaliser.
-	 */
-	public void dessertRapide () {
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-				"select * from RECETTE order by TEMPS_DE_PREPARATION + TEMPS_DE_CUISSON");
-			ResultSet rset = stmt.executeQuery();
-			print(rset);
-		}
-		catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	}
-
-	/**
-	 * rapportQP
-	 * 	Classe les recette par leur rapport qualité/prix.
-	 * 	Le rapport est calculé ainsi:
-	 * 		r = moyenne note(gastronomique + budget + difficulté) / prix
-	 */
-	public void rapportQP () {
-		String query =
-			"select NOM_RECETTE, CATEGORIE, BUDGET, "
-			+"avg(NOTE_GASTRONOMIQUE + NOTE_DIFFICULTE + NOTE_BUDGET) NOTE "
-			+"from RECETTE R, NOTE N "
-			+"where N.NUMERO_RECETTE = R.NUMERO_RECETTE";
-		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
-				
-			ResultSet rset = stmt.executeQuery();
-			print(rset);
-		}
-		catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	}
 
 	public void ajoutRecette (int numCreateur, String nomRecette,
 		String categorie, int difficulte, int budget,
@@ -262,6 +319,27 @@ public class Requete {
 		}
 	}
 
+	public void ajoutEleve (String nomEleve, String prenomEleve) {
+		int nbEleve = getNbEleve();
+
+		String query = 
+			"insert into ELEVE values "
+			+"(?, ?, ?) "; 
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			stmt.setInt(1, nbEleve+1);
+			stmt.setString(2, nomEleve.toUpperCase());
+			stmt.setString(3, prenomEleve.toUpperCase());
+
+			ResultSet rset = stmt.executeQuery();
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
 
 	public int getNbRct () {
 		try {
@@ -283,6 +361,7 @@ public class Requete {
 				"select count(*) from ALIMENT");
 			ResultSet rset = stmtNb.executeQuery();
 			rset.next();
+
 			return rset.getInt(1);
 		}
 		catch (Exception e) {
@@ -291,50 +370,20 @@ public class Requete {
 		}
 	}
 
-
-
-
-
-
-	// To correct
-	public void utilisateur (String nomEleve) {
+	public int getNbEleve () {
 		try {
-			PreparedStatement stmt = conn.prepareStatement(
-				"select * from ELEVE where NOM_ELEVE = ?");	//FAKE >=
-			stmt.setString(1, nomEleve); 
-			ResultSet rset = stmt.executeQuery();
-			print(rset);
-       	}
-       	catch (Exception e) {
-       		System.out.println(e.toString());
-       	}
+			PreparedStatement stmtNb = conn.prepareStatement(
+				"select count(*) from ELEVE");
+			ResultSet rset = stmtNb.executeQuery();
+			rset.next();
+			return rset.getInt(1);
+		}
+		catch (Exception e) {
+			System.out.println(e.toString());
+			return 0;
+		}
 	}
 
-	public void utilisateur (int numEleve) {
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-				"select * from ELEVE where NUMERO_ELEVE = ?");
-			stmt.setInt(1, numEleve); 
-			ResultSet rset = stmt.executeQuery();
-			print(rset);
-       	}
-       	catch (Exception e) {
-       		System.out.println(e.toString());
-       	}
-	}
-
-	public void recette (String nomRct) {
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-				"select * from RECETTE where NOM_RECETTE = ?");
-			stmt.setString(1, nomRct); 
-			ResultSet rset = stmt.executeQuery();
-			print(rset);
-       	}
-       	catch (Exception e) {
-       		System.out.println(e.toString());
-       	}
-	}
 
 	public void print (ResultSet rset) {
 		try {

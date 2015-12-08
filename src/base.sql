@@ -55,7 +55,7 @@ create table RECETTE
 create table ALIMENT
 (
     NUMERO_ALIMENT                NUMBER(4)              not null,
-    NOM_ALIMENT                   VARCHAR(20)               not null,
+    NOM_ALIMENT                   VARCHAR(30)               not null,
     MESURE                        VARCHAR(30)               not null,
     constraint pk_aliment primary key (NUMERO_ALIMENT)
 );
